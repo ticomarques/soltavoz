@@ -16,17 +16,17 @@ export default class AppForm extends Component {
         }
     }
 
-    
     getVoiceList = () => {
         let voices = []
-        const synth = window.speechSynthesis;
 
-        voices = synth.getVoices()
+        voices = window.speechSynthesis.getVoices()
         this.setState({ list: voices })
     }
+
     componentDidMount = () => {
         this.getVoiceList();
     }
+
     onTextChange = (e) => {
         const text = e.target.value
         this.setState({ text })
@@ -35,16 +35,13 @@ export default class AppForm extends Component {
     onRateChange = (e) => {
         const rate = e.target.value
         this.setState({ rate })
-
-        console.log(this.state)
     }
 
     onPitchChange = (e) => {
         const pitch = e.target.value
         this.setState({ pitch })
-
-        console.log(this.state)
     }
+    
     onVoiceChange = (e) => {
         const voice = e.target.value
         this.setState({ voice })
@@ -61,8 +58,6 @@ export default class AppForm extends Component {
         speaker.text = this.state.text;
         speaker.rate = this.state.rate;
         speaker.pitch = this.state.pitch;
-
-        console.log(speaker)
 
         speechSynthesis.speak(speaker);
     }
@@ -114,25 +109,7 @@ export default class AppForm extends Component {
                                     step="0.1"
                                     onChange={this.onPitchChange} 
                                 />
-                            </div>
-
-                            <div className="form-group">
-                                <select id="voice-select" className="form-control form-control-lg">
-                                    {/*this.state.list.map((item, index) => {
-                                        return (
-                                            <option 
-                                                key={index} 
-                                                data-name={item.name}
-                                                data-lang={item.lang}
-                                            >
-                                                {item.name} ({item.lang})
-                                            </option>
-                                        )
-                                    })*/}
-                                </select>
-                                {this.state.list.length}
-                            </div>
-                                    
+                            </div>  
 
                             <AwesomeButton type="primary" size="medium">Speak it</AwesomeButton>
                         </form>
